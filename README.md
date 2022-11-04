@@ -36,7 +36,9 @@ pnpm preview  // 本地打包预览
 npm config set registry https://registry.npmmirror.com/
 pnpm config set registry https://registry.npmmirror.com/
 ```
-<br/>
+
+---
+
 #### [扩展] 如何将history路由模式的项目打包部署到github pages
 
 在nginx部署上我们采用 `try_files $uri $uri/ /index.html;` 来重定所有的url页面
