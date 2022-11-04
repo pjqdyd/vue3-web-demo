@@ -39,35 +39,21 @@ pnpm config set registry https://registry.npmmirror.com/
 
 ---
 
-#### [扩展] 如何将history路由模式的项目打包部署到github pages
+#### [扩展] 将hash路由模式的项目打包部署到github pages
 
-在nginx部署上我们采用 `try_files $uri $uri/ /index.html;` 来重定所有的url页面
-到index上，来避免单页应用查找不到页面资源而出现404的情况，这是history路由的配置方式。
 
-在github pages上部署则可以使用重定404.html到index.html来hack解决:
-即在public下新建404.html 添加以下内容:
-```javascript
-<script>
-  (function(){
-    let redirect = sessionStorage.redirect;
-    delete sessionStorage.redirect;
-    if (redirect && redirect !== location.href) {
-      history.replaceState(null, null, redirect);
-    }
-  })();
-</script>
-```
-
-在index.html添加以下内容：
-```javascript
-<script>
-  sessionStorage.redirect = location.href;
-</script>
-```
-并且需要注意的是如果你的仓库名是repo-name, 那么在vite.config.js需要
+需要注意的是如果你的仓库名是repo-name, 那么在vite.config.js需要<br/>
 修改`base: '/repo-name'`来打包,
 因此部署后的访问地址变为：https://[username].github.io/[repo-name]
 
+```
+不采用history模式来部署github pages的原因是:
+
+如果我们使用history路由模式
+在nginx部署上可以采用 try_files $uri $uri/ /index.html; 配置
+来重定向所有的url页面到index上，来避免单页应用查找不到页面资源而出现404的情况。
+而在github pages的静态资源服务器上没有开放配置，因此使用hash模式路由。
+```
 ---
 #### License
 This project is licensed under the [MIT](https://github.com/pjqdyd/vue3-web-demo/blob/master/LICENSE) license.
