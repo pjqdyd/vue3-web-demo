@@ -68,14 +68,6 @@ pnpm config set registry https://registry.npmmirror.com/
 修改`base: '/repo-name'`来打包,
 因此部署后的访问地址变为：https://[username].github.io/[repo-name]
 
-打包推送github pages (origin是远程仓库的地址名字):
-```
-pnpm run build:prod
-
-git subtree push --prefix dist origin gh-pages
-```
-在github上将分支切换到gh-pages，然后点击save按钮，就能发布页面了。
-
 ---
 #### License
 This project is licensed under the [MIT](https://github.com/pjqdyd/vue3-web-demo/blob/master/LICENSE) license.
